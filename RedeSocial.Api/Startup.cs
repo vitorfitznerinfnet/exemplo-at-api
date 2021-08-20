@@ -12,6 +12,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RedeSocial.Infrastructure.EntityFramework;
+using RedeSocial.Core;
+using Microsoft.EntityFrameworkCore;
+using RedeSocial.Infrastructure;
 
 namespace RedeSocial.Api
 {
@@ -27,14 +30,18 @@ namespace RedeSocial.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RedeSocial.Api", Version = "v1" });
             });
 
-            services.AddInfrastructure();
+            
+            services.AddScoped<Aplicacao>();
+
+            var connectionString = Configuration.GetConnectionString("database");
+
+            services.AddInfrastructure(connectionString);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

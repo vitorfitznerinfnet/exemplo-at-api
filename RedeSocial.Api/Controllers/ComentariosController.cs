@@ -12,26 +12,17 @@ namespace RedeSocial.Api.Controllers
     [ApiController]
     public class ComentariosController : ControllerBase
     {
-        public IRepositorioPessoa RepositorioPessoa { get; }
-        public IRepositorioPost RepositorioPost { get; }
-        public IRepositorioComentario RepositorioComentario { get; }
+        private Aplicacao _aplicacao;
 
-        public ComentariosController(
-            IRepositorioPessoa repositorioPessoa,
-            IRepositorioPost repositorioPost,
-            IRepositorioComentario repositorioComentario)
+        public ComentariosController(Aplicacao aplicacao)
         {
-            RepositorioPessoa = repositorioPessoa;
-            RepositorioPost = repositorioPost;
-            RepositorioComentario = repositorioComentario;
+            _aplicacao = aplicacao;
         }
 
         [HttpPost]
         public ActionResult Post(AdicionarComentarioRequest request)
         {
-            var app = new Aplicacao(RepositorioPessoa, RepositorioPost, RepositorioComentario);
-
-            var mensagem = app.AdicionarComentario(request.PostId, request.PessoaId, request.Texto);
+            var mensagem = _aplicacao.AdicionarComentario(request.PostId, request.PessoaId, request.Texto);
 
             if (mensagem == "OK")
             {

@@ -7,9 +7,10 @@ namespace RedeSocial.Infrastructure
 {
     public static class Startup
     {
-        public static void AddInfrastructure(this IServiceCollection services)
+        public static void AddInfrastructure(this IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<BancoDeDados>(options => options.UseInMemoryDatabase("dbteste"));
+            services.AddDbContext<BancoDeDados>(options => options.UseSqlServer(connectionString));
+            //services.AddDbContext<BancoDeDados>(options => options.UseInMemoryDatabase("teste"));
 
             services.AddScoped<IRepositorioPessoa, RepositorioPessoa>();
             services.AddScoped<IRepositorioComentario, RepositorioComentario>();

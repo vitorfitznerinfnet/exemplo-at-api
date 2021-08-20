@@ -90,5 +90,11 @@ namespace RedeSocial.Core
 
             return posts;
         }
+
+        public IEnumerable<Pessoa> ConsultarPessoas()
+        {
+            var pessoas = RepositorioPessoa.Listar();
+            return pessoas;
+        }
     }
 }

@@ -4,6 +4,7 @@ namespace RedeSocial.Core
 {
     public class Pessoa
     {
+        public Guid Id { get; set; }
         public string Nome { get; internal set; }
         public string Sobrenome { get; internal set; }
         public string Email { get; internal set; }

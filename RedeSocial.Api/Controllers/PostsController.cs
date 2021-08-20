@@ -7,12 +7,17 @@ namespace RedeSocial.Api.Controllers
     [ApiController]
     public class PostsController : ControllerBase
     {
+        public PostsController(Aplicacao app)
+        {
+            App = app;
+        }
+
+        public Aplicacao App { get; }
+
         [HttpGet]
         public ActionResult Get()
         {
-            var app = new Aplicacao();
-
-            var posts = app.ConsultarPosts();
+            var posts = App.ConsultarPosts();
 
             return Ok(posts);
         }
